@@ -1,0 +1,24 @@
+Package: selectKSigs
+Type: Package
+Title: Selecting the number of mutational signatures using a perplexity-based 
+    measure and cross-validation 
+Depends: R(>= 3.6), ggplot2
+Imports: HiLDA, magrittr
+Suggests: knitr, rmarkdown, testthat, BiocStyle
+Version: 0.1.0
+Date: 2019-09-11
+Authors@R: c(person("Zhi", "Yang", email = "zyang895@gmail.com", 
+             role = c("aut", "cre")),
+             person("Yuichi", "Shiraishi", email = "friend1ws@gmail.com", 
+             role = "ctb"))
+Description: A package to suggest the number of mutational signatures in a 
+    collection of somatic mutations using calculating the cross-validated 
+    perplexity score. 
+URL: https://github.com/USCbiostats/selectKSigs
+BugReports: https://github.com/USCbiostats/HiLDA/selectKSigs
+License: GPL-3
+biocViews: Software, SomaticMutation, Sequencing, StatisticalMethod, Clustering
+RoxygenNote: 6.1.1
+LinkingTo: Rcpp
+VignetteBuilder: knitr
+Encoding: UTF-8
