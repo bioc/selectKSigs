@@ -3,21 +3,23 @@
 #'
 #' @param train a MutationFeatureData S4 class output of training data.
 #' @param test a MutationFeatureData S4 class output of test data.
-#' @param param
+#' @param paramG an estimatedParameters S4 class with estimated parameters
 #'
-#'
+#' @useDynLib selectKSigs
+#' @importFrom methods slot
+#' @importFrom Rcpp sourceCpp
+#' 
 #' @return the likelihood of the test data
 #'
 #'
 
-Calculate_Likelihood_test <- function(train = G_train, test = G_test,
-                                      param = param_train){
+Calculate_Likelihood_test <- function(train, test, paramG){
 
-    F <- param@signatureFeatureDistribution
-    Q <- param@sampleSignatureDistribution
+    F <- paramG@signatureFeatureDistribution
+    Q <- paramG@sampleSignatureDistribution
     fdim <- slot(train, "possibleFeatures")
-    K <- param@signatureNum
-    isBG <- param@isBackGround
+    K <- paramG@signatureNum
+    isBG <- paramG@isBackGround
     BG <- 0
     sampleNum <- length(slot(train, "sampleList"))
     tol <- 1e-4
@@ -25,7 +27,7 @@ Calculate_Likelihood_test <- function(train = G_train, test = G_test,
     p0 <- c(convertToTurbo_F(as.vector(F), fdim, K, isBG),
             convertToTurbo_Q(as.vector(Q), K, sampleNum))
     Y <- list(list(sampleNum, fdim, slot(test, "featureVectorList"),
-                   slot(test, "countData")), K, isBG, BG)
+              slot(test, "countData")), K, isBG, BG)
 
     return(calcPMSLikelihood(p0, Y))
 }
@@ -36,6 +38,7 @@ Calculate_Likelihood_test <- function(train = G_train, test = G_test,
 #'          membership parameters
 #' @param y this variable includes the information on the mutation features, 
 #'          the number of mutation signatures specified and so on
+#'          
 #' @return a value
 #' 
 calcPMSLikelihood <- function(p, y) {

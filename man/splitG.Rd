@@ -21,6 +21,7 @@ estimated
 }
 \examples{
 
+load(system.file("extdata/sample.rdata", package = "selectKSigs"))
 G_split <- splitG(G, Kfold = 3)
 
 }

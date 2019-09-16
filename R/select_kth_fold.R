@@ -11,23 +11,18 @@
 #' @importFrom magrittr %>%
 #' @importFrom gtools mixedsort
 #'
-#' @examples
-#'
-#' G_test <- select_kth_fold(G, k = 3, include=TRUE)
-#'
-#' @export
 #
 
 
-select_kth_fold <- function(inputG, k, f_s, folds, include=TRUE){
+select_kth_fold <- function(inputG, k, f_s, folds, include){
     G_temp <- inputG
     # select or unselect the ith fold of inputG
     if (include == TRUE){
       # create test data
-      temp <- f_s[which(folds==i,arr.ind=TRUE)] %>% sort()
+      temp <- f_s[which(folds==k,arr.ind=TRUE)] %>% sort()
     } else {
       # create traning data
-      temp <- f_s[which(folds!=i,arr.ind=TRUE)] %>% sort()
+      temp <- f_s[which(folds!=k,arr.ind=TRUE)] %>% sort()
     }
     # split the primary key to extract ID number and pattern
     temp_unlist <- strsplit(temp, "_")
@@ -38,7 +33,7 @@ select_kth_fold <- function(inputG, k, f_s, folds, include=TRUE){
       data.frame()
     rawCount[,c(2,1)] <- rawCount
     # return
-    rawCount[,2] <- sapply(rawCount[,2], function(x) which(x == t_list))
+    rawCount[,2] <- unlist(lapply(rawCount[,2], function(x) which(x == t_list)))
 
     # tabulate each mutation type
     tableCount <- table(rawCount)
@@ -49,11 +44,11 @@ select_kth_fold <- function(inputG, k, f_s, folds, include=TRUE){
     rownames(procCount) <- NULL
 
     # determine whether its has transcription direction
-    ncol = ifelse(G@transcriptionDirection, 6, 5)
+    ncol = ifelse(inputG@transcriptionDirection, 6, 5)
 
     # split the feature into a vector, i.e.,"124242" to "1, 2, 4, 2, 4, 2"
     G_temp@featureVectorList <-
-      matrix(unlist(sapply(lapply(temp_unlist, "[[", 1) %>% unique(),
+      matrix(unlist(lapply(lapply(temp_unlist, "[[", 1) %>% unique(),
                            function(x) strsplit(x, ""))) %>%
                as.numeric(), ncol=ncol , byrow = TRUE) %>% t()
     G_temp@sampleList <-

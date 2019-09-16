@@ -8,14 +8,16 @@ estimated}
 cv_PMSignature(inputG, Kfold = 3, nRep = 3, Klimit = 8)
 }
 \arguments{
-\item{train}{a MutationFeatureData S4 class output of training data.}
+\item{inputG}{a MutationFeatureData S4 class.}
 
-\item{test}{a MutationFeatureData S4 class output of test data.}
+\item{Kfold}{an integer number of the number of cross-validation folds.}
 
-\item{param}{}
+\item{nRep}{an integer number of replications.}
+
+\item{Klimit}{an integer of the maximum value of number of signatures.}
 }
 \value{
-the likelihood of the test data
+a matrix of measures
 }
 \description{
 Output the maximum potential scale reduction statistic of all parameters
@@ -23,6 +25,7 @@ estimated
 }
 \examples{
 
-res <- cv_PMSignature(G, Kfold = 3)
+load(system.file("extdata/sample.rdata", package = "selectKSigs"))
+results <- cv_PMSignature(G, Kfold = 3)
 
 }

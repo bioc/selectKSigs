@@ -11,7 +11,8 @@
 #' @importFrom gtools mixedsort
 #'
 #' @examples
-#'
+#' 
+#' load(system.file("extdata/sample.rdata", package = "selectKSigs"))
 #' G_split <- splitG(G, Kfold = 3)
 #'
 #' @export
@@ -29,7 +30,7 @@ splitG <- function(inputG, Kfold = 3) {
                inputG@countData[3,])
 
     # randomly shuffle the order of mutations
-    f_s <- f_s[sample(1:length(f_s))]
+    f_s <- f_s[sample(seq_len(length(f_s)))]
     # split mutations into Kfold number of folds
     folds <- cut(seq(1,length(f_s)),breaks=Kfold,labels=FALSE)
 
@@ -40,8 +41,9 @@ splitG <- function(inputG, Kfold = 3) {
     for(i in seq_len(Kfold)){
 
       # then save the training and test data to the ith of Glist
-      Glist[[i]] <- list(select_kth_fold(G, k=i, f_s, folds, include = FALSE),
-                         select_kth_fold(G, k=i, f_s, folds, include = TRUE))
+      Glist[[i]] <- 
+        list(select_kth_fold(inputG, k=i, f_s, folds, include = FALSE),
+             select_kth_fold(inputG, k=i, f_s, folds, include = TRUE))
     }
 
     # return the entire Glist

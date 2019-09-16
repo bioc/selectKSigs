@@ -2,10 +2,10 @@ Package: selectKSigs
 Type: Package
 Title: Selecting the number of mutational signatures using a perplexity-based 
     measure and cross-validation 
-Depends: R(>= 3.6), ggplot2
-Imports: HiLDA, magrittr
+Depends: R(>= 3.6)
+Imports: HiLDA, magrittr, gtools, methods, Rcpp
 Suggests: knitr, rmarkdown, testthat, BiocStyle
-Version: 0.1.0
+Version: 0.99.1
 Date: 2019-09-11
 Authors@R: c(person("Zhi", "Yang", email = "zyang895@gmail.com", 
              role = c("aut", "cre")),

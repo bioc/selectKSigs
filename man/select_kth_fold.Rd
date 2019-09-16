@@ -4,7 +4,7 @@
 \alias{select_kth_fold}
 \title{Output the training data or test data}
 \usage{
-select_kth_fold(inputG, k, f_s, folds, include = TRUE)
+select_kth_fold(inputG, k, f_s, folds, include)
 }
 \arguments{
 \item{inputG}{a MutationFeatureData S4 class output by the pmsignature.}
@@ -22,9 +22,4 @@ a MutationFeatureData S4 class of either include or exclude kth fold.
 }
 \description{
 Output the training data or test data
-}
-\examples{
-
-G_test <- select_kth_fold(G, k = 3, include=TRUE)
-
 }

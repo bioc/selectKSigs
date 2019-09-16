@@ -5,15 +5,14 @@
 \title{Output the maximum potential scale reduction statistic of all parameters
 estimated}
 \usage{
-Calculate_Likelihood_test(train = G_train, test = G_test,
-  param = param_train)
+Calculate_Likelihood_test(train, test, paramG)
 }
 \arguments{
 \item{train}{a MutationFeatureData S4 class output of training data.}
 
 \item{test}{a MutationFeatureData S4 class output of test data.}
 
-\item{param}{}
+\item{paramG}{an estimatedParameters S4 class with estimated parameters}
 }
 \value{
 the likelihood of the test data

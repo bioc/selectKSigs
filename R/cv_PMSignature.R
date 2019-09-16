@@ -1,24 +1,26 @@
 #' Output the maximum potential scale reduction statistic of all parameters
 #' estimated
 #'
-#' @param train a MutationFeatureData S4 class output of training data.
-#' @param test a MutationFeatureData S4 class output of test data.
-#' @param param
+#' @param inputG a MutationFeatureData S4 class.
+#' @param Kfold an integer number of the number of cross-validation folds.
+#' @param nRep an integer number of replications. 
+#' @param Klimit an integer of the maximum value of number of signatures.
 #'
 #' @importFrom HiLDA pmgetSignature
 #' 
 #' @examples
 #'
-#' res <- cv_PMSignature(G, Kfold = 3)
+#' load(system.file("extdata/sample.rdata", package = "selectKSigs"))
+#' results <- cv_PMSignature(G, Kfold = 3)
 #' 
-#' @return the likelihood of the test data
+#' @return a matrix of measures
 #'
+#' @export
 #'
 
 cv_PMSignature <- function(inputG, Kfold = 3, nRep = 3, Klimit = 8){
     # create a list to store the likelihood
-    LL_list <- replicate(nRep, matrix(NA, Klimit-1, Kfold), simplify=F)
-
+    LL_list <- replicate(nRep, matrix(NA, Klimit-1, Kfold), simplify=FALSE)
     # loop over the number of replications
     for(r in seq_len(nRep)){
       G_split <- splitG(inputG,  Kfold = Kfold)
@@ -36,13 +38,12 @@ cv_PMSignature <- function(inputG, Kfold = 3, nRep = 3, Klimit = 8){
         }
       }
     }
-
-
     # create a matrix to store the measures
-    measuremat <- matrix(NA, Klimit-1, 4)
+    measuremat <- data.frame(matrix(NA, Klimit-1, 4))
+    colnames(measuremat) <- c("AIC", "AICc", "BIC", "Perplexity")
 
     for(k in seq_len(Klimit-1)+1){
-      param<-HiLDA::pmgetSignature(G,K = k)
+      param<-HiLDA::pmgetSignature(inputG, K = k)
 
       # number of parameters
       nP <- length(param@sampleList)*(k-1) +
@@ -53,16 +54,16 @@ cv_PMSignature <- function(inputG, Kfold = 3, nRep = 3, Klimit = 8){
 
       #AICc
       measuremat[k-1, 2] <-param@loglikelihood*(-2) +
-        2*nP + 2*(nP)*(nP+1)/(sum(G@countData[3,]) - nP-1)
+        2*nP + 2*(nP)*(nP+1)/(sum(inputG@countData[3,]) - nP-1)
 
       # BIC
       measuremat[k-1, 3] <- param@loglikelihood*(-2) +
-        log(sum(G@countData[3,]))*nP
+        log(sum(inputG@countData[3,]))*nP
 
       # Perplexity
-      measuremat[k-1, 4] <- exp(param@loglikelihood*(-1)/sum(G@countData[3,]))
+      measuremat[k-1, 4] <- 
+        exp(param@loglikelihood*(-1)/sum(inputG@countData[3,]))
     }
 
-
-
+    return(measuremat)
 }
