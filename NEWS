@@ -1,5 +1,16 @@
-Changes in version 0.99.1 (2019-09-15)
-+ Submitted to Bioconductor
+selectKSigs 0.99.3
+----------------------------------------------------------------
 
-Changes in version 0.99.2 (2019-09-15)
-+ Remove selectKSigs.Rproj
+* Address all comments from the Bioconductor reviewer.
+
+
+selectKSigs 0.99.2
+----------------------------------------------------------------
+
+* Remove selectKSigs.Rproj.
+
+
+selectKSigs 0.99.1
+----------------------------------------------------------------
+
+* Submitted to Bioconductor.

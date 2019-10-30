@@ -44,7 +44,7 @@ select_kth_fold <- function(inputG, k, f_s, folds, include){
     rownames(procCount) <- NULL
 
     # determine whether its has transcription direction
-    ncol = ifelse(inputG@transcriptionDirection, 6, 5)
+    ncol = ifelse(getTranscription(inputG), 6, 5)
 
     # split the feature into a vector, i.e.,"124242" to "1, 2, 4, 2, 4, 2"
     G_temp@featureVectorList <-
@@ -54,7 +54,7 @@ select_kth_fold <- function(inputG, k, f_s, folds, include){
     G_temp@sampleList <-
       paste0("sample","_",unique(unlist(lapply(temp_unlist, "[[", 2))) %>%
                gtools::mixedsort())
-    G_temp@countData <- t(procCount)
+    G_temp@countData  <- t(procCount)
 
     return(G_temp)
 }

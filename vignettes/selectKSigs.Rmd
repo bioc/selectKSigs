@@ -101,12 +101,13 @@ are being removed.
 
 ```{r}
 library(HiLDA)
+library(dplyr)
 inputFile <- system.file("extdata/esophageal.mp.txt.gz", package="HiLDA")
 G <- hildaReadMPFile(inputFile, numBases=5, trDir=TRUE)
 ```
 
 Also, we also provided a small simulated dataset which contains 10 mutational 
-catalogs andused it for demonstrating the key functions in selectKSigs. We start 
+catalogs and used it for demonstrating the key functions in selectKSigs. We start 
 with loading the sample dataset G stored as extdata/sample.rdata.
 ```{r}
 library(selectKSigs)
@@ -118,13 +119,42 @@ load(system.file("extdata/sample.rdata", package = "selectKSigs"))
 After we read in the sample data G, we can run the process from selectKSigs. 
 Here, we specify the *inputG* as *G*, the number of cross-validation folds, 
 *kfold* to be 3, the number of replications, *nRep*, to be 3, and the upper 
-limit of the K values for exploration to be 8. 
-```{r}
-set.seed(123)
-results <- cv_PMSignature(G, Kfold = 3, nRep = 2, Klimit = 4)
+limit of the K values for exploration to be 7. 
+```{r include=FALSE}
+set.seed(5)
+results <- cv_PMSignature(G, Kfold = 3, nRep = 3, Klimit = 7)
 print(results)
 ```
 
-##
+### Visualizing the results
+After we obtained the results, we can plot each measure by the range of K values
+that were refitted during the calculation. The optimal value of K is achieved at 
+its minimum value highlighted in grey. 
+
+```{r}
+results$Kvalue <- seq_len(nrow(results)) + 1
+results_df <- tidyr::gather(results, Method, value, -Kvalue) %>% 
+  group_by(Method) %>%
+  mutate(xmin = which.min(value) + 1 - 0.1,
+         xmax = which.min(value) + 1 + 0.1)
+
+ggplot(results_df) +
+  geom_point(aes(x = Kvalue, y = value, color = Method), size = 2) +
+  facet_wrap(~ Method, scales = "free") + 
+  geom_rect(mapping = aes(xmin = xmin, xmax = xmax, 
+                          ymin = -Inf, ymax = Inf),
+            fill = 'grey', alpha = 0.05) +
+  theme_bw()+
+  xlab("Number of signatures")
+```
+
+
+## Session info
+Here is the output of `sessionInfo()` for reproducibility in the future. 
+
+```{r}
+sessionInfo()
+```
+
 
 

@@ -46,24 +46,24 @@ cv_PMSignature <- function(inputG, Kfold = 3, nRep = 3, Klimit = 8){
       param<-HiLDA::pmgetSignature(inputG, K = k)
 
       # number of parameters
-      nP <- length(param@sampleList)*(k-1) +
-        k*(sum(param@possibleFeatures)-length(param@possibleFeatures))
+      nP <- length(getSamplelist(param))*(k-1) +
+        k*(sum(getFeatures(param))-length(getFeatures(param)))
 
       # AIC
-      measuremat[k-1, 1]<- param@loglikelihood*(-2) + 2*nP
+      measuremat[k-1, 1]<- getLL(param)*(-2) + 2*nP
 
       #AICc
-      measuremat[k-1, 2] <-param@loglikelihood*(-2) +
-        2*nP + 2*(nP)*(nP+1)/(sum(inputG@countData[3,]) - nP-1)
+      measuremat[k-1, 2] <- getLL(param)*(-2) +
+        2*nP + 2*(nP)*(nP+1)/(sum(getCounts(inputG)[3,]) - nP-1)
 
       # BIC
-      measuremat[k-1, 3] <- param@loglikelihood*(-2) +
-        log(sum(inputG@countData[3,]))*nP
+      measuremat[k-1, 3] <- getLL(param)*(-2) +
+        log(sum(getCounts(inputG)[3,]))*nP
 
-      # Perplexity
-      measuremat[k-1, 4] <- 
-        exp(param@loglikelihood*(-1)/sum(inputG@countData[3,]))
     }
-
+      # Perplexity
+      measuremat[, 4] <- exp(rowMeans(sapply(LL_list, function(x) rowMeans(x)))*
+                               (-1)/sum(getCounts(inputG)[3,]))
+    
     return(measuremat)
 }

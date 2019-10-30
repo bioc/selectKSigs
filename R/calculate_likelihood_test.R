@@ -15,11 +15,11 @@
 
 Calculate_Likelihood_test <- function(train, test, paramG){
 
-    F <- paramG@signatureFeatureDistribution
-    Q <- paramG@sampleSignatureDistribution
+    F <- getSignatures(paramG)
+    Q <- getExposures(paramG)
     fdim <- slot(train, "possibleFeatures")
-    K <- paramG@signatureNum
-    isBG <- paramG@isBackGround
+    K <- getK(paramG)
+    isBG <- getBG(paramG)
     BG <- 0
     sampleNum <- length(slot(train, "sampleList"))
     tol <- 1e-4
