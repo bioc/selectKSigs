@@ -4,7 +4,6 @@
 #' 
 #' @return likelihood values estimated by \code{pmgetSignature} in \code{HiLDA}
 #' 
-#' @examples print(getLL(param))
 #' 
 setGeneric("getLL", function(object) standardGeneric("getLL"))
 setMethod("getLL", "EstimatedParameters", function(object) object@loglikelihood)
@@ -16,7 +15,6 @@ setMethod("getLL", "EstimatedParameters", function(object) object@loglikelihood)
 #' 
 #' @return the number of signatures in \code{pmgetSignature} in \code{HiLDA}
 #' 
-#' @examples print(getK(param))
 #' 
 setGeneric("getK", function(object) standardGeneric("getK"))
 setMethod("getK", "EstimatedParameters", function(object) object@signatureNum)
@@ -28,7 +26,6 @@ setMethod("getK", "EstimatedParameters", function(object) object@signatureNum)
 #' 
 #' @return the status of using the background signature
 #' 
-#' @examples print(getBG(param))
 #' 
 setGeneric("getBG", function(object) standardGeneric("getBG"))
 setMethod("getBG", "EstimatedParameters", function(object) object@isBackGround)
@@ -40,7 +37,6 @@ setMethod("getBG", "EstimatedParameters", function(object) object@isBackGround)
 #' 
 #' @return the sample list of named elements. 
 #' 
-#' @examples print(getSamplelist(param))
 #' 
 setGeneric("getSamplelist", function(object) standardGeneric("getSamplelist"))
 setMethod("getSamplelist", "EstimatedParameters", 
@@ -53,7 +49,6 @@ setMethod("getSamplelist", "EstimatedParameters",
 #' 
 #' @return a vector of possible features
 #' 
-#' @examples print(getFeatures(param))
 #' 
 setGeneric("getFeatures", function(object) standardGeneric("getFeatures"))
 setMethod("getFeatures", "EstimatedParameters", 
@@ -66,7 +61,6 @@ setMethod("getFeatures", "EstimatedParameters",
 #' 
 #' @return an array of signature feature distributions
 #' 
-#' @examples print(getSignatures(param))
 #' 
 setGeneric("getSignatures", function(object) standardGeneric("getSignatures"))
 setMethod("getSignatures", "EstimatedParameters", 
@@ -79,7 +73,6 @@ setMethod("getSignatures", "EstimatedParameters",
 #' 
 #' @return a matrix of mutational exposures of signatures
 #' 
-#' @examples print(getExposures(param))
 #' 
 setGeneric("getExposures", function(object) standardGeneric("getExposures"))
 setMethod("getExposures", "EstimatedParameters", 

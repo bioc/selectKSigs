@@ -15,7 +15,3 @@ a matrix of mutational exposures of signatures
 \description{
 Get a matrix of mutational exposures of signatures
 }
-\examples{
-print(getExposures(param))
-
-}

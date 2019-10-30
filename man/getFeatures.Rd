@@ -15,7 +15,3 @@ a vector of possible features
 \description{
 Get a vector of possible features
 }
-\examples{
-print(getFeatures(param))
-
-}

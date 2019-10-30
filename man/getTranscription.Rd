@@ -15,7 +15,3 @@ the status of specifying the transcription bias
 \description{
 Get the statsus of specifying the transcription bias
 }
-\examples{
-print(getTranscription(G))
-
-}

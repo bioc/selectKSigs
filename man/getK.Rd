@@ -15,7 +15,3 @@ the number of signatures in \code{pmgetSignature} in \code{HiLDA}
 \description{
 Get the number of signatures
 }
-\examples{
-print(getK(param))
-
-}

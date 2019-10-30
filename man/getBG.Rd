@@ -15,7 +15,3 @@ the status of using the background signature
 \description{
 Get the statsus of using the background signature
 }
-\examples{
-print(getBG(param))
-
-}

@@ -15,7 +15,3 @@ an array of signature feature distributions
 \description{
 Get an array of signature feature distributions
 }
-\examples{
-print(getSignatures(param))
-
-}

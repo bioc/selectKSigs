@@ -101,6 +101,8 @@ are being removed.
 
 ```{r}
 library(HiLDA)
+library(tidyr)
+library(ggplot2)
 library(dplyr)
 inputFile <- system.file("extdata/esophageal.mp.txt.gz", package="HiLDA")
 G <- hildaReadMPFile(inputFile, numBases=5, trDir=TRUE)
@@ -133,7 +135,7 @@ its minimum value highlighted in grey.
 
 ```{r}
 results$Kvalue <- seq_len(nrow(results)) + 1
-results_df <- tidyr::gather(results, Method, value, -Kvalue) %>% 
+results_df <- gather(results, Method, value, -Kvalue) %>% 
   group_by(Method) %>%
   mutate(xmin = which.min(value) + 1 - 0.1,
          xmax = which.min(value) + 1 + 0.1)

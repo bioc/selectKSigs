@@ -15,7 +15,3 @@ a matrix of feature vector list
 \description{
 Get a matrix of feature vector list
 }
-\examples{
-print(getFeatureVec(G))
-
-}

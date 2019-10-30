@@ -4,7 +4,6 @@
 #' 
 #' @return the status of specifying the transcription bias
 #' 
-#' @examples print(getTranscription(G))
 #' 
 setGeneric("getTranscription", function(object) 
   standardGeneric("getTranscription"))
@@ -18,15 +17,14 @@ setMethod("getTranscription", "MutationFeatureData",
 #' 
 #' @return the sample list of named elements. 
 #' 
-#' @examples print(getSamplelist(G))
 #' 
-setGeneric("getSamplelist", function(object) standardGeneric("getSamplelist"))
-setGeneric("getSamplelist<-", 
-           function(x, value) standardGeneric("getSamplelist<-"))
+setGeneric("getSamplelistG", function(object) standardGeneric("getSamplelistG"))
+setGeneric("getSamplelistG<-", 
+           function(x, value) standardGeneric("getSamplelistG<-"))
 
-setMethod("getSamplelist", "MutationFeatureData", 
+setMethod("getSamplelistG", "MutationFeatureData", 
           function(object) object@sampleList)
-setMethod("getSamplelist<-", "MutationFeatureData", function(x, value) {
+setMethod("getSamplelistG<-", "MutationFeatureData", function(x, value) {
   x@sampleList <- value
   x
 })
@@ -38,7 +36,6 @@ setMethod("getSamplelist<-", "MutationFeatureData", function(x, value) {
 #' 
 #' @return the count data in a matrix
 #' 
-#' @examples print(getCounts(G))
 #' 
 setGeneric("getCounts", function(object) standardGeneric("getCounts"))
 setGeneric("getCounts<-", 
@@ -56,7 +53,6 @@ setMethod("getCounts<-", "MutationFeatureData", function(x, value) {
 #' 
 #' @return a matrix of feature vector list
 #' 
-#' @examples print(getFeatureVec(G))
 #' 
 setGeneric("getFeatureVec", function(object) standardGeneric("getFeatureVec"))
 setGeneric("getFeatureVec<-", 

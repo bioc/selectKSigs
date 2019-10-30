@@ -47,14 +47,14 @@ select_kth_fold <- function(inputG, k, f_s, folds, include){
     ncol = ifelse(getTranscription(inputG), 6, 5)
 
     # split the feature into a vector, i.e.,"124242" to "1, 2, 4, 2, 4, 2"
-    G_temp@featureVectorList <-
+    getFeatureVec(G_temp) <-
       matrix(unlist(lapply(lapply(temp_unlist, "[[", 1) %>% unique(),
                            function(x) strsplit(x, ""))) %>%
                as.numeric(), ncol=ncol , byrow = TRUE) %>% t()
-    G_temp@sampleList <-
+    getSamplelistG(G_temp) <-
       paste0("sample","_",unique(unlist(lapply(temp_unlist, "[[", 2))) %>%
                gtools::mixedsort())
-    G_temp@countData  <- t(procCount)
+    getCounts(G_temp)  <- t(procCount)
 
     return(G_temp)
 }

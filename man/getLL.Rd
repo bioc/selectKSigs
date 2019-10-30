@@ -15,7 +15,3 @@ likelihood values estimated by \code{pmgetSignature} in \code{HiLDA}
 \description{
 Get the values of loglikelihood
 }
-\examples{
-print(getLL(param))
-
-}
