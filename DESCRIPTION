@@ -5,7 +5,7 @@ Title: Selecting the number of mutational signatures using a perplexity-based
 Depends: R(>= 3.6)
 Imports: HiLDA, magrittr, gtools, methods, Rcpp
 Suggests: knitr, rmarkdown, testthat, BiocStyle, ggplot2, dplyr, tidyr
-Version: 1.0.0
+Version: 1.1.0
 Date: 2019-09-11
 Authors@R: c(person("Zhi", "Yang", email = "zyang895@gmail.com", 
              role = c("aut", "cre")),
