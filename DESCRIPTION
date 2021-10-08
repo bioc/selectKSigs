@@ -5,8 +5,8 @@ Title: Selecting the number of mutational signatures using a perplexity-based
 Depends: R(>= 3.6)
 Imports: HiLDA, magrittr, gtools, methods, Rcpp
 Suggests: knitr, rmarkdown, testthat, BiocStyle, ggplot2, dplyr, tidyr
-Version: 0.99.5
-Date: 2019-09-11
+Version: 1.4.1
+Date: 2021-10-07
 Authors@R: c(person("Zhi", "Yang", email = "zyang895@gmail.com", 
              role = c("aut", "cre")),
              person("Yuichi", "Shiraishi", email = "friend1ws@gmail.com", 
@@ -18,7 +18,7 @@ URL: https://github.com/USCbiostats/selectKSigs
 BugReports: https://github.com/USCbiostats/HiLDA/selectKSigs
 License: GPL-3
 biocViews: Software, SomaticMutation, Sequencing, StatisticalMethod, Clustering
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
 LinkingTo: Rcpp
 VignetteBuilder: knitr
 Encoding: UTF-8

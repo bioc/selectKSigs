@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // getLogLikelihoodC
 double getLogLikelihoodC(NumericVector vPatternList, NumericVector vSparseCount, NumericVector vF, NumericVector vQ, NumericVector fdim, int signatureNum, int sampleNum, int patternNum, int samplePatternNum, bool isBackground, NumericVector vF0);
 RcppExport SEXP _selectKSigs_getLogLikelihoodC(SEXP vPatternListSEXP, SEXP vSparseCountSEXP, SEXP vFSEXP, SEXP vQSEXP, SEXP fdimSEXP, SEXP signatureNumSEXP, SEXP sampleNumSEXP, SEXP patternNumSEXP, SEXP samplePatternNumSEXP, SEXP isBackgroundSEXP, SEXP vF0SEXP) {
